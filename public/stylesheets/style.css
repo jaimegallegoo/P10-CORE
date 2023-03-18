@@ -1,8 +1,17 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+#titulo {
+  text-align: center;
 }
 
-a {
-  color: #00B7FF;
+body {
+  background-color: lightgrey;
+  color: rgb(0, 92, 128);
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+section {
+  border: 3px;
+  padding: 8px;
+}
+
+footer {
+  text-align: right;
 }
