@@ -19,3 +19,23 @@ exports.load = async (req, res, next, postId) => {
         next(error);
     }
 };
+
+// GET /posts/:postId/attachment
+exports.attachment = (req, res, next) => {
+    const { post } = req.load;
+    const { attachment } = post;
+
+    if (!attachment) {
+        res.redirect("/images/none.png");
+    }
+    else if (attachment.image) {
+        res.type(attachment.mime);
+        res.send(Buffer.from(attachment.image.toString(), 'base64'));
+    }
+    else if (attachment.url) {
+        res.redirect(attachment.url);
+    }
+    else {
+        res.redirect("/images/none.png");
+    }
+};
