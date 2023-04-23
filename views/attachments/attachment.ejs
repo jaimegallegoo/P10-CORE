@@ -1,0 +1,25 @@
+<div class="imageContainer">
+    <% var attachment = post.attachment; %>
+    <% if (attachment) { %>
+        <% if ( attachment.mime === "image/jpeg" ||
+                attachment.mime === "image/gif" ||
+                attachment.mime === "image/jpg" ||
+                attachment.mime === "image/png" ||
+                attachment.mime === "image/gif" ) { %>
+            <img class="attachment" src="/posts/<%= post.id %>/attachment" alt="Image"/>
+
+        <% } else if ( attachment.mime === "video/mp4" ) { %>
+            <video class="attachment" alt="Video" controls><source src="/posts/<%= post.id %>/attachment"></video>
+
+        <% } else if ( attachment.mime === "application/pdf" ) { %>
+            <img class="attachment" src="/images/pdf.png" alt="Image"/>
+
+        <% } else { %>
+            <img class="attachment" src="/images/doc.png" alt="Image"/>
+
+        <% } %>
+    <% } else { %>
+        <img class="attachment" src="/images/none.png" />
+    <% } %>
+
+</div>
