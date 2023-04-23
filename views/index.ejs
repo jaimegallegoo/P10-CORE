@@ -1,4 +1,15 @@
 <section>
-  <h1>Welcome to My Blog</h1>
-  <p>Esta es la página principal de esta web</p>
+  <h2>Posts:</h2>
+  <% for (var i in posts) { %>
+      <% var post = posts[i]; %>
+      <article class="postShow">
+          <h3 class="postTitle"><%= post.title %></h3>
+          <%# include('../attachments/_attachment', { post: post }) %>
+          <div class="postOptions">
+              <a class="button-2" href="/posts/<%= post.id %>">Show</a>
+              <a class="button-2" href="/posts/<%= post.id %>/edit">Edit</a>
+              <a class="button-2" href="/posts/<%= post.id %>?_method=DELETE" onClick="return confirm('Delete: <%= post.title %>');">Delete</a>
+          </div>
+      </article>
+  <% } %>
 </section>
