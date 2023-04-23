@@ -39,3 +39,19 @@ exports.attachment = (req, res, next) => {
         res.redirect("/images/none.png");
     }
 };
+
+// GET /posts
+exports.index = async (req, res, next) => {
+    try {
+        const findOptions = {
+            include: [
+                {model: models.Attachment, as: 'attachment'}
+            ]
+        };
+
+        const posts = await models.Post.findAll(findOptions);
+        res.render('posts/index.ejs', {posts});
+    } catch (error) {
+        next(error);
+    }
+};
