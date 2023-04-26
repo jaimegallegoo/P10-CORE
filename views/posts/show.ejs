@@ -1,0 +1,11 @@
+<section>
+    <a href="/posts" class="button-2">Volver a listado de posts</a>
+    <h2>Show Post:</h2>
+    <%- include('../attachments/_attachment', { post: post }) %>
+    <article class="postShow">
+        <ul>
+            <li>Title: <b><%= post.title %></b></li>
+            <li>Body: <b><%= post.body %></b></li>
+        </ul>
+    </article>
+</section>

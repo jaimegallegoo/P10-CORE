@@ -60,4 +60,4 @@ exports.index = async (req, res, next) => {
 exports.show = (req, res, next) => {
     const {post} = req.load;
     res.render('posts/show', {post});
-};
+}; 
