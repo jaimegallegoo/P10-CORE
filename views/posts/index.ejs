@@ -5,7 +5,7 @@
         <% var post = posts[i]; %>
         <article class="postShow">
             <h3 class="postTitle"><%= post.title %></h3>
-            <%# include('../attachments/_attachment', { post: post }) %>
+            <%- include('../attachments/_attachment', { post: post }) %>
             <div class="postOptions">
                 <a class="button-2" href="/posts/<%= post.id %>">Show</a>
                 <a class="button-2" href="/posts/<%= post.id %>/edit">Edit</a>
