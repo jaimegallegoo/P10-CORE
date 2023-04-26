@@ -22,4 +22,7 @@ router.get('/posts/:postId(\\d+)/attachment', postController.attachment);
 /* P7 - Tarea 6: GET /posts */
 router.get('/posts', postController.index);
 
+/* P7 - Tarea 7: GET /posts/:postId */
+router.get('/posts/:postId(\\d+)', postController.show);
+
 module.exports = router;
