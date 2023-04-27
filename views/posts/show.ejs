@@ -3,8 +3,9 @@
     <%- include('../attachments/_attachment', { post: post }) %>
     <article class="postShow">
         <ul>
-            <li>Title: <b><%= post.title %></b></li>
-            <li>Body: <b><%= post.body %></b></li>
+            <li>Título: <b><%= post.title %></b></li>
+            <li>Descripción: <b><%= post.body %></b></li>
         </ul>
     </article>
+    <a href="/posts" class="button-2">Volver a la lista de posts</a>
 </section>
