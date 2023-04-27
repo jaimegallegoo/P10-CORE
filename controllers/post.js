@@ -108,3 +108,20 @@ exports.create = async (req, res, next) => {
         }
     }
 };
+
+// Aux function to upload req.file to cloudinary, create an attachment with it, and
+// associate it with the gien post.
+// This function is called from the create an update middleware. DRY.
+const createPostAttachment = async (req, post) => {
+    const image = req.file.buffer.toString('base64');
+    const url = `${req.protocol}://${req.get('host')}/posts/${post.id}/attachment`;
+
+    // Create the new attachment into the data base.
+    const attachment = await models.Attachment.create({
+        mime: req.file.mimetype,
+        image,
+        url
+    });
+    await post.setAttachment(attachment);
+    console.log('Success: Attachment saved successfully.');
+};
