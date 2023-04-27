@@ -2,7 +2,7 @@
 
 const {Model} = require('sequelize');
 
-// Definición del modelo Post
+// Definition of the model Post
 module.exports = (sequelize, DataTypes) => {
     
     class Post extends Model { }
