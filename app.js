@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var partials = require('express-partials');
+var methodOverride = require('method-override');
 
 var indexRouter = require('./routes/index');
 
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(partials());
+app.use(methodOverride('_method', {methods: ["POST", "GET"]}));
 
 app.use('/', indexRouter);
 
