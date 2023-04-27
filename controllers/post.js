@@ -61,3 +61,12 @@ exports.show = (req, res, next) => {
     const {post} = req.load;
     res.render('posts/show', {post});
 }; 
+
+// GET /posts/new
+exports.new = (req, res, next) => {
+    const post = {
+        title: "",
+        body: ""
+    };
+    res.render('posts/new', {post});
+};
