@@ -70,3 +70,41 @@ exports.new = (req, res, next) => {
     };
     res.render('posts/new', {post});
 };
+
+// POST /posts/create
+exports.create = async (req, res, next) => {
+    const {title, body} = req.body;
+
+    let post;
+    try {
+        post = models.Post.build({
+            title,
+            body
+        });
+
+        post = await post.save({fields: ["title", "body"]});
+        console.log('Post creado con éxito.');
+
+        try {
+            if (!req.file) {
+                console.log('Info: Se requiere una foto.');
+                return;
+            }
+
+            // Create the post attachment
+            await createPostAttachment(req, post);
+        } catch (error) {
+            console.log('Error: Failed to create attachment: ' + error.message);
+        } finally {
+            res.redirect('/posts/' + post.id);
+        }
+    } catch (error) {
+        if (error instanceof (Sequelize.ValidationError)) {
+            console.log('Errores en el formulario:');
+            error.errors.forEach(({message}) => console.log(message));
+            res.render('posts/new', {post});
+        } else {
+            next(error);
+        }
+    }
+};
