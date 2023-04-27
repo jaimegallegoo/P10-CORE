@@ -1,0 +1,11 @@
+<section>
+    <h2>Edit Post:</h2>
+    <a href="/posts" class="button-2">Volver a listado de posts</a>
+    <h3>Title previo:</h3>
+    <p><%= post.title %></p>
+    <h3>Body previo:</h3>
+    <p><%= post.body %></p>
+    <form method="post" action="/posts/<%= post.id %>?_method=PUT" enctype="multipart/form-data" >
+        <%- include('_form.ejs') %>
+    </form>
+</section>
