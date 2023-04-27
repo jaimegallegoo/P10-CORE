@@ -5,8 +5,10 @@
   "scripts": {
     "start": "node ./bin/www",
     "super": "supervisor ./bin/www",
-    "migrate_win": "sequelize db:migrate --url sqlite://%cd%/blog.sqlite",
-    "seed_win": "sequelize db:seed:all --url sqlite://%cd%/blog.sqlite"
+    "migrate": "sequelize db:migrate --url sqlite://$(pwd)/blog.sqlite",  
+    "seed": "sequelize db:seed:all --url sqlite://$(pwd)/blog.sqlite",  
+    "migrate_win": "sequelize db:migrate --url sqlite://%cd%/blog.sqlite",  
+    "seed_win": "sequelize db:seed:all --url sqlite://%cd%/blog.sqlite"  
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
