@@ -131,3 +131,44 @@ exports.edit = (req, res, next) => {
     const {post} = req.load;
     res.render('posts/edit', {post});
 };
+
+// PUT /posts/:postId
+exports.update = async (req, res, next) => {
+    const {post} = req.load;
+
+    post.title = req.body.title;
+    post.body = req.body.body;
+
+    try {
+        await post.save({fields: ["title", "body"]});
+        console.log('Post editado exitosamente.');
+
+        try {
+            if (!req.file) {
+                console.log('Info: Foto no cambiada.');
+                return;
+            }
+
+            // Delete old attachment.
+            if (post.attachment) {
+                await post.attachment.destroy();
+                await post.setAttachment();
+            }
+            
+            // Create the post attachment
+            await createPostAttachment(req, post);
+        } catch (error) {
+            console.log('Error: Fallo guardando la foto: ' + error.message);
+        } finally {
+            res.redirect('/posts/' + post.id);
+        }
+    } catch (error) {
+        if (error instanceof (Sequelize.ValidationError)) {
+            console.log('Errores en el formulario:');
+            error.errors.forEach(({message}) => console.log(message));
+            res.render('posts/edit', {post});
+        } else {
+            next(error);
+        }
+    }
+};
