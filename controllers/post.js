@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const {models} = require("../models");
+const createError = require('http-errors');
 
 // Autoload el post asociado a :postId
 exports.load = async (req, res, next, postId) => {
@@ -13,7 +14,7 @@ exports.load = async (req, res, next, postId) => {
             req.load = {...req.load, post};
             next();
         } else {
-            throw new Error('No hay post con id=' + postId);
+            throw createError(404, 'There is no post with id=' + postId);
         }
     } catch (error) {
         next(error);
@@ -58,16 +59,20 @@ exports.index = async (req, res, next) => {
 
 // GET /posts/:postId
 exports.show = (req, res, next) => {
+
     const {post} = req.load;
+
     res.render('posts/show', {post});
-}; 
+};
 
 // GET /posts/new
 exports.new = (req, res, next) => {
+
     const post = {
         title: "",
         body: ""
     };
+
     res.render('posts/new', {post});
 };
 
@@ -83,11 +88,11 @@ exports.create = async (req, res, next) => {
         });
 
         post = await post.save({fields: ["title", "body"]});
-        console.log('Post creado con éxito.');
+        console.log('Success: Post created successfully.');
 
         try {
             if (!req.file) {
-                console.log('Info: Se requiere una foto.');
+                console.log('Info: Quiz without attachment.');
                 return;
             }
 
@@ -100,7 +105,7 @@ exports.create = async (req, res, next) => {
         }
     } catch (error) {
         if (error instanceof (Sequelize.ValidationError)) {
-            console.log('Errores en el formulario:');
+            console.log('There are errors in the form:');
             error.errors.forEach(({message}) => console.log(message));
             res.render('posts/new', {post});
         } else {
@@ -128,12 +133,15 @@ const createPostAttachment = async (req, post) => {
 
 // GET /posts/:postId/edit
 exports.edit = (req, res, next) => {
+
     const {post} = req.load;
+
     res.render('posts/edit', {post});
 };
 
 // PUT /posts/:postId
 exports.update = async (req, res, next) => {
+
     const {post} = req.load;
 
     post.title = req.body.title;
@@ -141,11 +149,11 @@ exports.update = async (req, res, next) => {
 
     try {
         await post.save({fields: ["title", "body"]});
-        console.log('Post editado exitosamente.');
+        console.log('Success: Post edited successfully.');
 
         try {
             if (!req.file) {
-                console.log('Info: Foto no cambiada.');
+                console.log('Info: Quiz attachment not changed.');
                 return;
             }
 
@@ -158,13 +166,13 @@ exports.update = async (req, res, next) => {
             // Create the post attachment
             await createPostAttachment(req, post);
         } catch (error) {
-            console.log('Error: Fallo guardando la foto: ' + error.message);
+            console.log('Error: Failed saving the new attachment: ' + error.message);
         } finally {
             res.redirect('/posts/' + post.id);
         }
     } catch (error) {
         if (error instanceof (Sequelize.ValidationError)) {
-            console.log('Errores en el formulario:');
+            console.log('There are errors in the form:');
             error.errors.forEach(({message}) => console.log(message));
             res.render('posts/edit', {post});
         } else {
@@ -175,15 +183,16 @@ exports.update = async (req, res, next) => {
 
 // DELETE /posts/:postId
 exports.destroy = async (req, res, next) => {
+
     const attachment = req.load.post.attachment;
 
     try {
         await req.load.post.destroy();
         attachment && await attachment.destroy();
-        console.log('Post eliminado con éxito.');
+        console.log('Success: Post deleted successfully.');
         res.redirect('/posts');
     } catch (error) {
-        console.log('Error eliminando Post: ' + error.message);
+        console.log('Error: Error deleting the Post: ' + error.message);
 
         next(error);
     }
