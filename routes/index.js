@@ -3,6 +3,14 @@ var router = express.Router();
 
 const postController = require('../controllers/post');
 
+const multer = require('multer');
+const storage = multer.memoryStorage();
+
+const upload = multer({
+  storage: storage,
+  limits: {fileSize: 20 * 1024 * 1024}
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
