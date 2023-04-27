@@ -15,11 +15,11 @@ module.exports = {
           },
           title: {
               type: Sequelize.STRING,
-              validate: {notEmpty: {msg: "title must not be empty."}}
+              validate: {notEmpty: {msg: "Title must not be empty."}}
           },
           body: {
               type: Sequelize.TEXT,
-              validate: {notEmpty: {msg: "body must not be empty."}}
+              validate: {notEmpty: {msg: "Body must not be empty."}}
           },
           attachmentId: {
             type: Sequelize.STRING,
