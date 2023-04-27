@@ -15,3 +15,32 @@ section {
 footer {
   text-align: right;
 }
+
+.postShow-container {
+display: flex;
+flex-wrap: wrap;
+margin-top: 20px;
+margin-bottom: 20px;
+}
+
+.postShow {
+width: calc(25% - 20px);
+margin-right: 20px;
+margin-bottom: 20px;
+padding: 10px;
+box-sizing: border-box;
+background-color: #fff;
+border-radius: 5px;
+}
+
+.postShow:last-child {
+margin-right: 0;
+}
+
+.postTitle {
+margin-bottom: 10px;
+}
+
+.postOptions {
+margin-top: 10px;
+}
