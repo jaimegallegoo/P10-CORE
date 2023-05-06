@@ -44,6 +44,9 @@
         <% if ( !user.id) { %>
             <label for="username" class="rem">User name:</label>
             <input type="text" id="username" name="username" value="<%= user.username %>" autocomplete="off"/>
+
+            <label for="email" class="rem">Email:</label>
+            <input type="text" id="email" name="email" value="<%= user.email %>" autocomplete="off"/>
         <% } else { %>
             Username: <%= user.username %>
         <% } %>
