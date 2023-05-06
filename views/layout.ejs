@@ -11,6 +11,13 @@
           <a href="/posts">Posts</a>
           <a href="/author">Author</a>
           <a href="/users">Users</a>
+          
+          <% if (!locals.loginUser) { %>
+            <a href="/login">Login</a>
+          <% } else { %>
+            <a href="/users/<%= loginUser.id %>"><%= loginUser.username %></a>
+            <a href="/login?_method=DELETE">Logout</a>
+          <% } %>
         </nav>
         <h1 id="titulo">Mi página web</h1>
     </header>
