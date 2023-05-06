@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 const postController = require('../controllers/post');
+const userController = require('../controllers/user');
+const sessionController = require('../controllers/session');
 
 const multer = require('multer');
 const storage = multer.memoryStorage();
@@ -47,5 +49,17 @@ router.put('/posts/:postId(\\d+)', upload.single('image'), postController.update
 
 /* DELETE /posts/:postId */
 router.delete('/posts/:postId(\\d+)', postController.destroy);
+
+// Autoload
+router.param('userId', userController.load);
+
+// Routes for the resource /users
+router.get('/',                    userController.index);
+router.get('/:userId(\\d+)',      userController.show);
+router.get('/new',                userController.new);
+router.post('/',                   userController.create);
+router.get('/:userId(\\d+)/edit', userController.edit);
+router.put('/:userId(\\d+)',      userController.update);
+router.delete('/:userId(\\d+)',   userController.destroy);
 
 module.exports = router;
