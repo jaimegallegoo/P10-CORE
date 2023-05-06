@@ -49,7 +49,8 @@ exports.new = (req, res, next) => {
 
     const user = {
         username: "",
-        password: ""
+        password: "",
+        email: ""
     };
 
     res.render('users/new', {user});
@@ -59,11 +60,12 @@ exports.new = (req, res, next) => {
 // POST /users
 exports.create = async (req, res, next) => {
 
-    const {username, password} = req.body;
+    const {username, password, email} = req.body;
 
     let user = models.User.build({
         username,
-        password
+        password,
+        email
     });
 
     // Password must not be empty.
@@ -74,7 +76,7 @@ exports.create = async (req, res, next) => {
 
     try {
         // Save into the data base
-        user = await user.save({fields: ["username", "password", "salt"]});
+        user = await user.save({fields: ["username", "password", "email", "salt"]});
         console.log('Success: User created successfully.');
         if (req.session.loginUser) {
             res.redirect('/users/' + user.id);
@@ -111,6 +113,7 @@ exports.update = async (req, res, next) => {
     const {body} = req;
     const {user} = req.load;
 
+    user.email = body.email;
     // user.username  = body.username; // edition not allowed
 
     let fields_to_update = [];
