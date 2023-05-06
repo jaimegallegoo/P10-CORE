@@ -10,6 +10,7 @@ module.exports = {
         {
             username: 'admin',
             password: crypt.encryptPassword('1234', 'aaaa'),
+            email: "admin@core.example",
             salt: 'aaaa',
             isAdmin: true,
             createdAt: new Date(), updatedAt: new Date()
@@ -17,6 +18,7 @@ module.exports = {
         {
             username: 'pepe',
             password: crypt.encryptPassword('5678', 'bbbb'),
+            email: "user@core.example",
             salt: 'bbbb',
             createdAt: new Date(), updatedAt: new Date()
         }
