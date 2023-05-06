@@ -62,4 +62,12 @@ router.get('/:userId(\\d+)/edit', userController.edit);
 router.put('/:userId(\\d+)',      userController.update);
 router.delete('/:userId(\\d+)',   userController.destroy);
 
+// autologout
+router.all('*',sessionController.deleteExpiredUserSession);
+
+// Routes for the resource /session
+router.get('/login',    sessionController.new);     // login form
+router.post('/login',   sessionController.create);  // create sesion
+router.delete('/login', sessionController.destroy); // close sesion
+
 module.exports = router;
