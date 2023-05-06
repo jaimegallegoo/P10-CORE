@@ -1,25 +1,29 @@
 'use strict';
 
+var crypt = require('../helpers/crypt');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+  up(queryInterface, Sequelize) {
+
+    return queryInterface.bulkInsert('users', [
+        {
+            username: 'admin',
+            password: crypt.encryptPassword('1234', 'aaaa'),
+            salt: 'aaaa',
+            isAdmin: true,
+            createdAt: new Date(), updatedAt: new Date()
+        },
+        {
+            username: 'pepe',
+            password: crypt.encryptPassword('5678', 'bbbb'),
+            salt: 'bbbb',
+            createdAt: new Date(), updatedAt: new Date()
+        }
+    ]);
   },
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+  down(queryInterface, Sequelize) {
+    return queryInterface.bulkDelete('users', null, {});
   }
 };
