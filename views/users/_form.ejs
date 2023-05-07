@@ -38,21 +38,18 @@
     }
 </script>
 
+<section>
+    <ul>
+        <li>
+            <label for="username" class="rem">Email:</label><br>
+            <input type="email" pattern=".+@.+" id="email" name="email" value="<%= user.email %>" autocomplete="off"/>
+        </li>
 
-<ul>
-    <li>
-        <% if ( !user.id) { %>
-            <label for="username" class="rem">User name:</label>
+        <li>
+            <label for="email" class="rem">User name:</label><br>
             <input type="text" id="username" name="username" value="<%= user.username %>" autocomplete="off"/>
-
-            <label for="email" class="rem">Email:</label>
-            <input type="text" id="email" name="email" value="<%= user.email %>" autocomplete="off"/>
-        <% } else { %>
-            Username: <%= user.username %>
-        <% } %>
-    </li>
-
-    <li>
+        </li>
+    
         <% if (!user.id) { %>
             <span class="text-danger">Enter the new password twice</span>
         <% } else { %>
@@ -69,9 +66,8 @@
                 <input type="password" id="user_confirm_password" autocomplete="off"/>
             </li>
         </ul>
-
-    </li>
-</ul>
+    </ul>
+</section>
 
 <div>
     <a href="/users" class="button">Cancel</a>

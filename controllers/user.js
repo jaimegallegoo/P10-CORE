@@ -114,9 +114,9 @@ exports.update = async (req, res, next) => {
     const {user} = req.load;
 
     user.email = body.email;
-    // user.username  = body.username; // edition not allowed
+    user.username  = body.username;
 
-    let fields_to_update = [];
+    let fields_to_update = ["username", "email"];
 
     // ¿Cambio el password?
     if (body.password) {
