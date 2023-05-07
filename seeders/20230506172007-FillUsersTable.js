@@ -16,7 +16,7 @@ module.exports = {
             createdAt: new Date(), updatedAt: new Date()
         },
         {
-            username: 'pepe',
+            username: 'user',
             password: crypt.encryptPassword('5678', 'bbbb'),
             email: "user@core.example",
             salt: 'bbbb',
