@@ -24,7 +24,7 @@ module.exports = {
                 validate: {notEmpty: {msg: "Password must not be empty."}}
             },
             email: {
-                type: DataTypes.STRING,
+                type: Sequelize.STRING,
                 unique: true,
                 validate: {isEmail: {msg: "The email format is not valid"}}
             },
