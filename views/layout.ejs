@@ -7,24 +7,27 @@
   <body>
     <header id="mainHeader" class="main">
         <nav id="navegacion">
-          <a href="/">Home</a>
-          <a href="/posts">Posts</a>
-          <a href="/author">Author</a>
-          <a href="/users">Users</a>
-          
-          <% if (!locals.loginUser) { %>
-            <a href="/login">Login</a>
-          <% } else { %>
-            <a href="/users/<%= loginUser.id %>"><%= loginUser.username %></a>
-            <a href="/login?_method=DELETE">Logout</a>
-          <% } %>
+          <div class="navigationButtons">
+            <a href="/">Home</a>
+            <a href="/posts">Posts</a>
+            <a href="/author">Author</a>
+            <a href="/users">Users</a>
+          </div>
+          <div class="loginButtons">
+            <% if (!locals.loginUser) { %>
+              <a href="/login">Login</a>
+            <% } else { %>
+              <a href="/users/<%= loginUser.id %>"><%= loginUser.username %></a>
+              <a href="/login?_method=DELETE">Logout</a>
+            <% } %>
+          </div>
         </nav>
         <h1 id="titulo">Mi página web</h1>
     </header>
     <%- body %>
     <footer>
         <p>Página web desarrollada por Jaime Gallego Chillón</p>
-        <p>Última versión: 27-04-2023</p>
+        <p>Última versión: 10-05-2023</p>
     </footer>
   </body>
 </html>

@@ -44,3 +44,18 @@ margin-bottom: 10px;
 .postOptions {
 margin-top: 10px;
 }
+
+.loginButtons {
+  text-align: right;
+}
+
+.button {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: rgb(145, 153, 158);
+  color: rgb(0, 92, 128);
+  text-align: center;
+  border-color: black;
+  border-radius: 5px;
+  cursor: pointer;
+}
