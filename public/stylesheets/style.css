@@ -45,17 +45,30 @@ margin-bottom: 10px;
 margin-top: 10px;
 }
 
-.loginButtons {
-  text-align: right;
-}
-
 .button {
   display: inline-block;
-  padding: 5px 10px;
+  padding: 3px 8px;
   background-color: rgb(145, 153, 158);
   color: rgb(0, 92, 128);
   text-align: center;
   border-color: black;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.navigationButtons {
+  float: left;
+  color: rgb(0, 92, 128);
+}
+
+.loginButtons {
+  float: right;
+  color: rgb(0, 92, 128);
+}
+
+.button2 {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
