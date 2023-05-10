@@ -15,4 +15,8 @@ const User = require('./user')(sequelize, Sequelize.DataTypes);
 Attachment.hasOne(Post, {as: 'post', foreignKey: 'attachmentId'});
 Post.belongsTo(Attachment, {as: 'attachment', foreignKey: 'attachmentId'});
 
+// Relation 1-to-N between User and Post:
+User.hasMany(Post, {as: 'posts', foreignKey: 'authorId'});
+Post.belongsTo(User, {as: 'author', foreignKey: 'authorId'});
+
 module.exports = sequelize;
