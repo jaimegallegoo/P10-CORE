@@ -80,19 +80,22 @@ exports.new = (req, res, next) => {
 exports.create = async (req, res, next) => {
     const {title, body} = req.body;
 
+    const authorId = req.session.loginUser?.id;
+
     let post;
     try {
         post = models.Post.build({
             title,
-            body
+            body,
+            authorId
         });
 
-        post = await post.save({fields: ["title", "body"]});
+        post = await post.save({fields: ["title", "body", "authorId"]});
         console.log('Success: Post created successfully.');
 
         try {
             if (!req.file) {
-                console.log('Info: Quiz without attachment.');
+                console.log('Info: Post without attachment.');
                 return;
             }
 
@@ -153,7 +156,7 @@ exports.update = async (req, res, next) => {
 
         try {
             if (!req.file) {
-                console.log('Info: Quiz attachment not changed.');
+                console.log('Info: Post attachment not changed.');
                 return;
             }
 
