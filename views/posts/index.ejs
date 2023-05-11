@@ -12,6 +12,9 @@
                     <a class="button" href="/posts/<%= post.id %>/edit">Editar</a>
                     <a class="button" href="/posts/<%= post.id %>?_method=DELETE" onClick="return confirm('Delete: <%= post.title %>');">Borrar</a>
                 </div>
+                <div>
+                    <small id="author"> by <%= post.author?.username ?? "Anonymous" %> </small>
+                </div>
             </article>
         <% } %>
     </div>
