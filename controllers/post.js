@@ -7,7 +7,8 @@ exports.load = async (req, res, next, postId) => {
     try {
         const post = await models.Post.findByPk(postId, {
             include: [
-                {model: models.Attachment, as: 'attachment'}
+                {model: models.Attachment, as: 'attachment'},
+                {model: models.User, as: 'author'}
             ]
         });
         if (post) {
