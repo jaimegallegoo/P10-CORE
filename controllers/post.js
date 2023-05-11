@@ -47,7 +47,8 @@ exports.index = async (req, res, next) => {
     try {
         const findOptions = {
             include: [
-                {model: models.Attachment, as: 'attachment'}
+                {model: models.Attachment, as: 'attachment'},
+                {model: models.User, as: 'author'}
             ]
         };
 
