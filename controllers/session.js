@@ -143,19 +143,3 @@ exports.adminRequired = (req, res, next) => {
         res.send(403);
     }
 };
-
-// MW that allows to pass only if the logged in user is:
-// - admin
-// - or is the author of the post.
-exports.adminOrAuthorRequired = (req, res, next) => {
-
-    const isAdmin = !!req.session.loginUser?.isAdmin;
-    const isAuthor = req.load.post.authorId === req.session.loginUser?.id;
-
-    if (isAdmin || isAuthor) {
-        next();
-    } else {
-        console.log('Prohibited route: it is not the author of the post, nor an administrator.');
-        res.send(403);
-    }
-};
