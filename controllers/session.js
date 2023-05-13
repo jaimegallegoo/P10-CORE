@@ -96,3 +96,20 @@ exports.destroy = (req, res, next) => {
 
     res.redirect("/login"); // redirect to login gage
 };
+
+// Middleware: Login required.
+//
+// If the user is logged in previously then there will exists
+// the req.session.loginUser object, so I continue with the others
+// middlewares or routes.
+// If req.session.loginUser does not exist, then nobody is logged,
+// so I redirect to the login screen.
+//
+exports.loginRequired = function (req, res, next) {
+    if (req.session.loginUser) {
+        next();
+    } else {
+        console.log("Info: Login required: log in and retry.");
+        res.redirect('/login');
+    }
+};
