@@ -36,7 +36,7 @@ router.get('/posts', postController.index);
 router.get('/posts/:postId(\\d+)', postController.show);
 
 /* GET /posts/new */
-router.get('/posts/new', postController.new);
+router.get('/posts/new', sessionController.loginRequired, postController.new);
 
 /* POST /posts */
 router.post('/posts', upload.single('image'), postController.create);
