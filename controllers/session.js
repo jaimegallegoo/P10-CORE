@@ -113,3 +113,19 @@ exports.loginRequired = function (req, res, next) {
         res.redirect('/login');
     }
 };
+
+// MW that allows to pass only if the logged in user is:
+// - admin
+// - or is the user to be managed.
+exports.adminOrMyselfRequired = (req, res, next) => {
+
+    const isAdmin = !!req.session.loginUser?.isAdmin;
+    const isMyself = req.load.user.id === req.session.loginUser?.id;
+
+    if (isAdmin || isMyself) {
+        next();
+    } else {
+        console.log('Prohibited route: it is not the logged in user, nor an administrator.');
+        res.send(403);
+    }
+};
