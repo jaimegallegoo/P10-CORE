@@ -58,9 +58,9 @@ router.get('/users', sessionController.adminRequired, userController.index);
 router.get('/users/:userId(\\d+)', sessionController.adminOrMyselfRequired, userController.show);
 router.get('/users/new', sessionController.adminRequired, userController.new);
 router.post('/users', sessionController.adminRequired, userController.create);
-router.get('/users/:userId(\\d+)/edit', sessionController.adminOrMyselfRequired, userController.edit);
+router.get('/users/:userId(\\d+)/edit', sessionController.loginRequired, sessionController.adminOrMyselfRequired, userController.edit);
 router.put('/users/:userId(\\d+)', sessionController.adminOrMyselfRequired, userController.update);
-router.delete('/users/:userId(\\d+)', sessionController.adminOrMyselfRequired, userController.destroy);
+router.delete('/users/:userId(\\d+)', sessionController.loginRequired, sessionController.adminOrMyselfRequired, userController.destroy);
 
 // Autologout
 router.all('*',sessionController.deleteExpiredUserSession);
