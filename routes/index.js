@@ -54,10 +54,10 @@ router.delete('/posts/:postId(\\d+)', postController.destroy);
 router.param('userId', userController.load);
 
 // Routes for the resource /users
-router.get('/users', userController.index);
+router.get('/users', sessionController.adminRequired, userController.index);
 router.get('/users/:userId(\\d+)', sessionController.adminOrAuthorRequired, userController.show);
-router.get('/users/new', userController.new);
-router.post('/users', userController.create);
+router.get('/users/new', sessionController.adminRequired, userController.new);
+router.post('/users', sessionController.adminRequired, userController.create);
 router.get('/users/:userId(\\d+)/edit', sessionController.adminOrAuthorRequired, userController.edit);
 router.put('/users/:userId(\\d+)', sessionController.adminOrAuthorRequired, userController.update);
 router.delete('/users/:userId(\\d+)', sessionController.adminOrAuthorRequired, userController.destroy);
