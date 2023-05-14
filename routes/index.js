@@ -42,13 +42,13 @@ router.get('/posts/new', sessionController.loginRequired, postController.new);
 router.post('/posts', upload.single('image'), postController.create);
 
 /* GET /posts/:postId/edit */
-router.get('/posts/:postId(\\d+)/edit', sessionController.adminOrAuthorRequired, postController.edit);
+router.get('/posts/:postId(\\d+)/edit', postController.adminOrAuthorRequired, postController.edit);
 
 /* GET /posts/:postId/update */
 router.put('/posts/:postId(\\d+)', upload.single('image'), postController.update);
 
 /* DELETE /posts/:postId */
-router.delete('/posts/:postId(\\d+)', sessionController.adminOrAuthorRequired, postController.destroy);
+router.delete('/posts/:postId(\\d+)', postController.adminOrAuthorRequired, postController.destroy);
 
 // Autoload
 router.param('userId', userController.load);
