@@ -11,12 +11,16 @@
             <%= user.isAdmin ? "(admin)" : "" %>
         </td>
         <td>
-            <a href="/users/<%= user.id %>/edit" class="button">edit</a>
+            <% if (locals.loginUser?.isAdmin || locals.loginUser?.id === user.id) { %>
+                <a href="/users/<%= user.id %>/edit" class="button">edit</a>
+            <% } %>
         </td>
         <td>
-            <a href="/users/<%= user.id %>?_method=DELETE"
-               onClick="return confirm('Delete user: <%= user.username %>');"
-               class="button">delete</a>
+            <% if (locals.loginUser?.isAdmin || locals.loginUser?.id === user.id) { %>
+                <a href="/users/<%= user.id %>?_method=DELETE"
+                    onClick="return confirm('Delete user: <%= user.username %>');"
+                    class="button">delete</a>
+            <% } %>            
         </td>
     </tr>
     <%  } %>
