@@ -22,4 +22,6 @@
     <%  } %>
 </table>
 
-<a href="/users/new" class="button">Create new user</a>
+<% if (locals.loginUser?.isAdmin) { %>
+    <a href="/users/new" class="button">Crear nuevo usuario</a>
+<% } %>
