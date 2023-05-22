@@ -7,8 +7,11 @@
             <li>Descripción: <b><%= post.body %></b></li>
         </ul>
         <div>
-            <small id="author"> by <%= post.author?.username ?? "Anonymous" %> </small>
+            <small id="author"> Autor: <%= post.author?.username ?? "Anonymous" %> </small>
         </div>
+        <% if (locals.loginUser && (locals.loginUser.isAdmin || locals.loginUser.id === post.authorId)) { %>
+            <a class="button" href="/posts/<%= post.id %>/edit">Editar</a>
+        <% } %>
     </article>
     <a href="/posts" class="button">Volver a la lista de posts</a>
 </section>
