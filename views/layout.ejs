@@ -11,7 +11,9 @@
             <a href="/">Home</a>
             <a href="/posts">Posts</a>
             <a href="/author">Author</a>
-            <a href="/users">Users</a>
+            <% if (locals.loginUser?.isAdmin) { %>
+              <a href="/users">Users</a>
+            <% } %>            
           </div>
           <div class="loginButtons">
             <% if (!locals.loginUser) { %>

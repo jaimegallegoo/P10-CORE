@@ -42,25 +42,25 @@ router.get('/posts/new', sessionController.loginRequired, postController.new);
 router.post('/posts', upload.single('image'), postController.create);
 
 /* GET /posts/:postId/edit */
-router.get('/posts/:postId(\\d+)/edit', postController.edit);
+router.get('/posts/:postId(\\d+)/edit', postController.adminOrAuthorRequired, postController.edit);
 
 /* GET /posts/:postId/update */
 router.put('/posts/:postId(\\d+)', upload.single('image'), postController.update);
 
 /* DELETE /posts/:postId */
-router.delete('/posts/:postId(\\d+)', postController.destroy);
+router.delete('/posts/:postId(\\d+)', postController.adminOrAuthorRequired, postController.destroy);
 
 // Autoload
 router.param('userId', userController.load);
 
 // Routes for the resource /users
-router.get('/users',                    userController.index);
-router.get('/users/:userId(\\d+)',      userController.show);
-router.get('/users/new',                userController.new);
-router.post('/users',                   userController.create);
-router.get('/users/:userId(\\d+)/edit', userController.edit);
-router.put('/users/:userId(\\d+)',      userController.update);
-router.delete('/users/:userId(\\d+)',   userController.destroy);
+router.get('/users', sessionController.adminRequired, userController.index);
+router.get('/users/:userId(\\d+)', sessionController.adminOrMyselfRequired, userController.show);
+router.get('/users/new', sessionController.adminRequired, userController.new);
+router.post('/users', sessionController.adminRequired, userController.create);
+router.get('/users/:userId(\\d+)/edit', sessionController.loginRequired, sessionController.adminOrMyselfRequired, userController.edit);
+router.put('/users/:userId(\\d+)', sessionController.adminOrMyselfRequired, userController.update);
+router.delete('/users/:userId(\\d+)', sessionController.loginRequired, sessionController.adminOrMyselfRequired, userController.destroy);
 
 // Autologout
 router.all('*',sessionController.deleteExpiredUserSession);
